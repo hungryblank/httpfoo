@@ -75,3 +75,25 @@
   (post? (recur post-on-missing-resource) put?)
   (put? conflict? (recur maybe-multiple-representations))
   (conflict? (terminate 409) (recur new-resource)))})
+
+;; take a triple
+;; take the 2 last child
+;; map them to their definition
+;; return a new list
+(declare interpolate)
+
+(defn lookup
+  "given a key and "
+  [element list]
+  (if (list? element)
+    element
+    (interpolate
+     (first (filter (fn [x] (= element (first x))) list ))
+     list
+     ())))
+
+(defn interpolate
+  "interpolates a triple with other definitions"
+  [current list global]
+  (cons (first current)
+   (map (fn [element] (lookup element list)) (rest current))))
