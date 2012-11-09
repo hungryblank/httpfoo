@@ -13,23 +13,23 @@
   (content-header-unknown? (terminate 501) content-type-unknown?)
   (content-type-unknown? (terminate 415) request-entity-too-large?)
   (request-entity-too-large? (terminate 413) options?)
-  (options? (terminate 200) accept-exists)
-  (accept-exists acceptable-media-type-available? accept-language-exists?)
+  (options? (terminate 200) accept-exists?)
+  (accept-exists? acceptable-media-type-available? accept-language-exists?)
   (acceptable-media-type-available? accept-language-exists? (terminate 406))
-  (accept-language-exists? acceptable-language-available? accept-charset-exists)
+  (accept-language-exists? acceptable-language-available? accept-charset-exists?)
   (acceptable-language-available? accept-charset-exists? (terminate 406))
-  (accept-charset-exists? acceptable-charset-available? accept-encoding-exists)
-  (acceptable-charset-available? accept-encoding-exists (terminate 406))
-  (accept-encoding-exists acceptable-encoding-available? resource-exists)
+  (accept-charset-exists? acceptable-charset-available? accept-encoding-exists?)
+  (acceptable-charset-available? accept-encoding-exists? (terminate 406))
+  (accept-encoding-exists? acceptable-encoding-available? resource-exists?)
   (acceptable-encoding-available? resource-exists? (terminate 406))
   (resource-exists? (recur :with-resource) (recur :without-resource))
   )
 
 :without-resource
   '((if-match-* put? (terminate 412))
-  (put? apply-to-different-uri? resource-previously-existed?)`
+  (put? apply-to-different-uri? resource-previously-existed?)
   (apply-to-different-uri? (terminate 301) conflict?)
-  (conflict? terminate(409) (recur :new-resource))
+  (conflict? (terminate 409) (recur :new-resource))
   (resource-previously-existed? (recur :without-resource-existed)
     (recur :without-resource-didnt-exist)))
 
@@ -38,7 +38,7 @@
   (resource-moved-temporarily? (terminate 307) post?)
   (post? post-to-missing-resources-allowed? (terminate 410))
   (post-to-missing-resources-allowed? (recur :post-on-missing-resource)
-    terminate(410)))
+    (terminate 410)))
 
 :without-resource-didnt-exist
   '((post? post-to-missing-resources-allowed? (terminate 404))
@@ -109,13 +109,6 @@
      list
      ())))
 
-(defn safe-lookup
-  [element list]
-  (if (= '(nil) ( lookup element list))
-    (throw (Throwable. element)
-    (lookup element list)
-)))
-
 (defn interpolate
   "interpolates a triple with other definitions"
   [current list global]
@@ -123,4 +116,27 @@
    (map (fn [element] (lookup element list)) (rest current))))
 
 (defn all
-  "all keys to interpolated before")
+  "all functions a request should respond to"
+  []
+  (distinct
+   (flatten
+    (map
+     (fn [x]
+       (map
+        (fn [y]
+          (filter
+           (fn [z]
+             (not (list? z)))y)) x) )
+         (vals state-flow)))))
+
+(defn triple-to-fun
+  "makes a function out of a triple"
+  [triple]
+  (let [mame (first triple)
+        positive (second triple)
+        negative (nnext triple)]
+  (list 'defn mame
+    ['response]
+    (list 'if (list mame 'response)
+      (list positive 'response)
+      (list negative 'response)))))
