@@ -22,44 +22,44 @@
   (acceptable-charset-available? (ask accept-encoding-exists?) (terminate 406))
   (accept-encoding-exists? (ask acceptable-encoding-available?) (ask resource-exists?))
   (acceptable-encoding-available? (ask resource-exists?) (terminate 406))
-  (resource-exists? (recur :with-resource) (recur :without-resource))
+  (resource-exists? (follow :with-resource) (follow :without-resource))
   )
 
 :without-resource
   '((if-match-* (ask put?) (terminate 412))
   (put? (ask apply-to-different-uri?) (ask resource-previously-existed?))
   (apply-to-different-uri? (terminate 301) (ask conflict?))
-  (conflict? (terminate 409) (recur :new-resource))
-  (resource-previously-existed? (recur :without-resource-existed)
-    (recur :without-resource-didnt-exist)))
+  (conflict? (terminate 409) (follow :new-resource))
+  (resource-previously-existed? (follow :without-resource-existed)
+    (follow :without-resource-didnt-exist)))
 
 :without-resource-existed
   '((resource-moved-permanently? (terminate 301) (ask resource-moved-temporarily?))
   (resource-moved-temporarily? (terminate 307) (ask post?))
   (post? (ask post-to-missing-resources-allowed?) (terminate 410))
-  (post-to-missing-resources-allowed? (recur :post-on-missing-resource)
+  (post-to-missing-resources-allowed? (follow :post-on-missing-resource)
     (terminate 410)))
 
 :without-resource-didnt-exist
   '((post? (ask post-to-missing-resources-allowed?) (terminate 404))
-  (post-to-missing-resources-allowed? (recur :post-on-missing-resource)
+  (post-to-missing-resources-allowed? (follow :post-on-missing-resource)
     (terminate 404)))
 
 :post-on-missing-resource
-  '((redirect? (terminate 303) (recur :new-resource)))
+  '((redirect? (terminate 303) (follow :new-resource)))
 
 :new-resource
-  '((new-resource? (terminate 201) (recur :response-maybe-including-entity)))
+  '((new-resource? (terminate 201) (follow :response-maybe-including-entity)))
 
 :response-maybe-including-entity
-  '((reponse-include-an-entity? (recur :maybe-multiple-representations) (terminate 204)))
+  '((reponse-include-an-entity? (follow :maybe-multiple-representations) (terminate 204)))
 :maybe-multiple-representations
   '((multiple-representation? (terminate 300) (terminate 200)))
 
 :with-resource
-  '((if-match? (ask if-match-*) (recur :handle-unmodified))
-  (if-match-* (recur :handle-unmodified) (ask etag-in-if-match?))
-  (etag-in-if-match? (recur :handle-unmodified) (terminate 412)))
+  '((if-match? (ask if-match-*) (follow :handle-unmodified))
+  (if-match-* (follow :handle-unmodified) (ask etag-in-if-match?))
+  (etag-in-if-match? (follow :handle-unmodified) (terminate 412)))
 
 :handle-unmodified
   '((if-unmodified-since? (ask if-unmodified-since-valid-date?) (ask if-none-match-exists?))
@@ -74,10 +74,10 @@
   (if-modified-since-gt-now? (ask delete?) (ask last-modified-gt-if-modified-since?))
   (last-modified-gt-if-modified-since? (ask delete?) (terminate 304))
   (delete? (ask delete-enacted?) (ask post?))
-  (delete-enacted? (recur :response-maybe-including-entity) (terminate 202))
-  (post? (recur :post-on-missing-resource) (ask put?))
-  (put? (ask conflict?) (recur :maybe-multiple-representations))
-  (conflict? (terminate 409) (recur :new-resource)))})
+  (delete-enacted? (follow :response-maybe-including-entity) (terminate 202))
+  (post? (follow :post-on-missing-resource) (ask put?))
+  (put? (ask conflict?) (follow :maybe-multiple-representations))
+  (conflict? (terminate 409) (follow :new-resource)))})
 
 ;; take a triple
 ;; take the 2 last child
@@ -93,9 +93,9 @@
 (defn rezolve
   "if joining is needed to it"
   [element]
-  (if (= (first element) 'recur)
+  (if (= (first element) 'follow)
     (pp/pprint [(second  element) "foooooo"]))
-  (if (= (first element) 'recur)
+  (if (= (first element) 'follow)
     (interpolate-flat (get state-flow (second element)))
     element))
 

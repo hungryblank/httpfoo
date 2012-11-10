@@ -25,7 +25,7 @@
 
 (defn good-triple
   [triple]
-  (let [known-verbs '(ask terminate recur)]
+  (let [known-verbs '(ask terminate follow)]
     (doseq [action (map first (rest triple))]
       (is (member action known-verbs) "doh!!"))))
 
