@@ -17,6 +17,25 @@
   (testing "is a fun"
     (is (= (all) 1))))
 
+(defn member [x sq]
+  (if (seq sq)
+    (if (= x (first sq))
+      true
+      (recur x (rest sq)))))
+
+(defn good-triple
+  [triple]
+  (let [known-verbs '(ask terminate recur)]
+    (doseq [action (map first (rest triple))]
+      (is (member action known-verbs) "doh!!"))))
+
+(deftest well-defined-test
+  (testing "all positive/negative are lists with known verbs"
+      (doseq [[k, v] state-flow]
+        (doseq [triple, v]
+          (good-triple triple)
+          ))))
+
 ;;
 ;;(deftest print-fun-test
 ;;  (testing "is a fun"
