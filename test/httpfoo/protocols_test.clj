@@ -1,7 +1,7 @@
 (ns httpfoo.protocols-test
   (:use clojure.test
         httpfoo.core
-        httpfoo.graph.root
+        httpfoo.decision.root
         httpfoo.protocols))
 
 (defrecord Dummy []

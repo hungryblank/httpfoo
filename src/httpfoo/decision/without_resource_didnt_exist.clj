@@ -1,7 +1,7 @@
-(ns httpfoo.graph.without-resource-didnt-exist
+(ns httpfoo.decision.without-resource-didnt-exist
   (:use httpfoo.macros
         httpfoo.protocols)
-  (:require [httpfoo.graph.post-on-missing-resource :as post-on-missing-resource]))
+  (:require [httpfoo.decision.post-on-missing-resource :as post-on-missing-resource]))
 
 (declare ask-post-to-missing-resources-allowed?)
 

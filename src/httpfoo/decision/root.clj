@@ -1,8 +1,8 @@
-(ns httpfoo.graph.root
+(ns httpfoo.decision.root
   (:use httpfoo.macros
         httpfoo.protocols)
-  (:require [httpfoo.graph.with-resource :as with-resource]
-            [httpfoo.graph.without-resource :as without-resource]))
+  (:require [httpfoo.decision.with-resource :as with-resource]
+            [httpfoo.decision.without-resource :as without-resource]))
 
 (declare ask-known-method?)
 (declare ask-uri-too-long?)

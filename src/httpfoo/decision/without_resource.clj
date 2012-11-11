@@ -1,9 +1,9 @@
-(ns httpfoo.graph.without-resource
+(ns httpfoo.decision.without-resource
   (:use httpfoo.macros
         httpfoo.protocols)
-  (:require [httpfoo.graph.without-resource-didnt-exist :as without-resource-didnt-exist]
-            [httpfoo.graph.without-resource-existed :as without-resource-existed]
-            [httpfoo.graph.new-resource :as new-resource]))
+  (:require [httpfoo.decision.without-resource-didnt-exist :as without-resource-didnt-exist]
+            [httpfoo.decision.without-resource-existed :as without-resource-existed]
+            [httpfoo.decision.new-resource :as new-resource]))
 
 (declare ask-put?)
 (declare ask-apply-to-different-uri?)

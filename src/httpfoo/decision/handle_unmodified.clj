@@ -1,11 +1,11 @@
-(ns httpfoo.graph.handle-unmodified
+(ns httpfoo.decision.handle-unmodified
   (:use httpfoo.macros
         httpfoo.protocols)
   (:require
-            [httpfoo.graph.response-maybe-including-entity :as response-maybe-including-entity]
-            [httpfoo.graph.post-on-missing-resource :as post-on-missing-resource]
-            [httpfoo.graph.maybe-multiple-representations :as maybe-multiple-representations]
-            [httpfoo.graph.new-resource :as new-resource]))
+            [httpfoo.decision.response-maybe-including-entity :as response-maybe-including-entity]
+            [httpfoo.decision.post-on-missing-resource :as post-on-missing-resource]
+            [httpfoo.decision.maybe-multiple-representations :as maybe-multiple-representations]
+            [httpfoo.decision.new-resource :as new-resource]))
 
 (declare ask-if-unmodified-since-valid-date?)
 (declare ask-last-modified-gt-if-unmodified-since?)

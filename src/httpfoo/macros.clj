@@ -1,6 +1,6 @@
 (ns httpfoo.macros)
 
-(defmacro follow  [namespace req]  `(~(ns-resolve (symbol (str "httpfoo.graph." (name namespace))) 'start) ~req))
+(defmacro follow  [namespace req]  `(~(ns-resolve (symbol (str "httpfoo.decision." (name namespace))) 'start) ~req))
 
 (defmacro ask
   [question arg]

@@ -1,7 +1,7 @@
 ;;
-(ns httpfoo.graph-test
+(ns httpfoo.decision-test
   (:use clojure.test
-        httpfoo.graph.root)
+        httpfoo.decision.root)
 
 (deftest fail-test
   (testing "FIXME, I fail."

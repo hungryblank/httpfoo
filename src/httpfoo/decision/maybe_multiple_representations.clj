@@ -1,4 +1,4 @@
-(ns httpfoo.graph.maybe-multiple-representations
+(ns httpfoo.decision.maybe-multiple-representations
   (:use httpfoo.macros
         httpfoo.protocols))
 
