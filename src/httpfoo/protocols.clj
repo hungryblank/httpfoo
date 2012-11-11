@@ -31,7 +31,7 @@
   (etag-in-if-match? [context])
   (post? [context])
   (post-to-missing-resources-allowed? [context])
-  (reponse-include-an-entity? [context])
+  (response-include-an-entity? [context])
   (multiple-representation? [context])
   (redirect? [context])
   (new-resource? [context])

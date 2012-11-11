@@ -52,7 +52,7 @@
   '((new-resource? (terminate 201) (follow :response-maybe-including-entity)))
 
 :response-maybe-including-entity
-  '((reponse-include-an-entity? (follow :maybe-multiple-representations) (terminate 204)))
+  '((response-include-an-entity? (follow :maybe-multiple-representations) (terminate 204)))
 :maybe-multiple-representations
   '((multiple-representation? (terminate 300) (terminate 200)))
 
