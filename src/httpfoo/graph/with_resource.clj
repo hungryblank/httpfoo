@@ -1,6 +1,7 @@
 (ns httpfoo.graph.with-resource
   (:use httpfoo.macros
-        httpfoo.protocols))
+        httpfoo.protocols)
+   (:require [httpfoo.graph.handle-unmodified :as handle-unmodified]))
 
 (declare ask-if-match-*)
 (declare ask-etag-in-if-match?)
