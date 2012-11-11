@@ -47,3 +47,6 @@
 (question accept-encoding-exists? (ask acceptable-encoding-available?) (ask resource-exists?))
 (question acceptable-encoding-available? (ask resource-exists?) (terminate 406))
 (question resource-exists? (follow :with-resource) (follow :without-resource))
+
+(def start
+  ask-available?)

@@ -39,3 +39,6 @@
 (question post? (follow :post-on-missing-resource) (ask put?))
 (question put? (ask conflict?) (follow :maybe-multiple-representations))
 (question conflict? (terminate 409) (follow :new-resource))
+
+(def start
+  ask-if-unmodified-since?)

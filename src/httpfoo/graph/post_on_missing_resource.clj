@@ -4,3 +4,6 @@
   (:require [httpfoo.graph.new-resource :as new-resource]))
 
 (question redirect? (terminate 303) (follow :new-resource))
+
+(def start
+  ask-redirect?)

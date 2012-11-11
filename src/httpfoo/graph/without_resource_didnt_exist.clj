@@ -7,3 +7,6 @@
 
 (question post? (ask post-to-missing-resources-allowed?) (terminate 404))
 (question post-to-missing-resources-allowed? (follow :post-on-missing-resource) (terminate 404))
+
+(def start
+  ask-post?)

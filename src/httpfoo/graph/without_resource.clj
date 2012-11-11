@@ -15,3 +15,6 @@
 (question apply-to-different-uri? (terminate 301) (ask conflict?))
 (question conflict? (terminate 409) (follow :new-resource))
 (question resource-previously-existed? (follow :without-resource-existed) (follow :without-resource-didnt-exist))
+
+(def start
+  ask-if-match-*)

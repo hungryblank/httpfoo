@@ -11,3 +11,6 @@
 (question resource-moved-temporarily? (terminate 307) (ask post?))
 (question post? (ask post-to-missing-resources-allowed?) (terminate 410))
 (question post-to-missing-resources-allowed? (follow :post-on-missing-resource) (terminate 410))
+
+(def start
+  ask-resource-moved-permanently?)
