@@ -24,11 +24,7 @@
 (declare ask-acceptable-encoding-available?)
 (declare ask-resource-exists?)
 
-
-
-
 (question available? (ask known-method?) (terminate 503))
-(prn (macroexpand '( question available? (ask known-method?) (terminate 503))))
 (question known-method? (ask uri-too-long?) (terminate 501))
 (question uri-too-long? (terminate 414) (ask method-allowed?))
 (question method-allowed? (ask malformed?) (terminate 405))
