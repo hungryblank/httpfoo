@@ -54,7 +54,7 @@
   (conflict? [context] true)
   (apply-to-different-uri? [context] true)
   (resource-previously-existed? [context] true)
-  (finish [context return-code] return-code))
+  (finish [context status-code] status-code))
 
 (deftest dummy-handler-test
   (testing "a dummy handler should return a predictable status code")

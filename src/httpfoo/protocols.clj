@@ -54,4 +54,4 @@
   (conflict? [context])
   (apply-to-different-uri? [context])
   (resource-previously-existed? [context])
-  (finish [context return-code]))
+  (finish [context status-code]))
