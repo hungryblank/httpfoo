@@ -1,4 +1,4 @@
-(ns httpfoo.graph.handle-unmodified
+(ns httpfoo.graph.new-resource
   (:use httpfoo.macros
         httpfoo.protocols)
   (:require [httpfoo.graph.response-maybe-including-entity :as response-maybe-including-entity]))
