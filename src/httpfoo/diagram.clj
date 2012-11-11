@@ -79,44 +79,8 @@
   (put? (ask conflict?) (follow :maybe-multiple-representations))
   (conflict? (terminate 409) (follow :new-resource)))})
 
-;; take a triple
-;; take the 2 last child
-;; map them to their definition
-;; return a new list
-(declare interpolate)
-
-(defn interpolate-flat
-  "get a key"
-  [list]
-  (interpolate (first list) (rest list) ()))
-
-(defn rezolve
-  "if joining is needed to it"
-  [element]
-  (if (= (first element) 'follow)
-    (pp/pprint [(second  element) "foooooo"]))
-  (if (= (first element) 'follow)
-    (interpolate-flat (get state-flow (second element)))
-    element))
-
-(defn lookup
-  "given a key and "
-  [element list]
-  (if (list? element)
-    (rezolve element)
-    (interpolate
-     (first (filter (fn [x] (= element (first x))) list ))
-     list
-     ())))
-
-(defn interpolate
-  "interpolates a triple with other definitions"
-  [current list global]
-  (cons (first current)
-   (map (fn [element] (lookup element list)) (rest current))))
-
-(defn all
-  "all functions a request should respond to"
+(defn all-questions
+  "all questions needed by the decision flow, used as a base for protocol"
   []
   (distinct
    (flatten
@@ -128,15 +92,3 @@
            (fn [z]
              (not (list? z)))y)) x) )
          (vals state-flow)))))
-
-(defn triple-to-fun
-  "makes a function out of a triple"
-  [triple]
-  (let [mame (first triple)
-        positive (second triple)
-        negative (nnext triple)]
-  (list 'defn mame
-    ['response]
-    (list 'if (list mame 'response)
-      (list positive 'response)
-      (list negative 'response)))))

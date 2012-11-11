@@ -57,6 +57,6 @@
   (finish [context return-code] return-code))
 
 (deftest dummy-handler-test
-  (testing "a dummy handler")
+  (testing "a dummy handler should return a predictable status code")
   (let [req (Dummy.)]
-    (is (= (ask-available? req) 1) )))
+    (is (= (start req) 412) )))
