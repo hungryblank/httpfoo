@@ -1,8 +1,8 @@
 (ns httpfoo.protocols-test
   (:use clojure.test
         httpfoo.core
-        httpfoo.decision.root
-        httpfoo.protocols))
+        httpfoo.protocols)
+  (:require [httpfoo.decision.root :as decision-root]))
 
 (defrecord Dummy []
   Handler
@@ -59,4 +59,4 @@
 (deftest dummy-handler-test
   (testing "a dummy handler should return a predictable status code")
   (let [req (Dummy.)]
-    (is (= (start req) 412) )))
+    (is (= (decision-root/start req) 412) )))
