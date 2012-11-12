@@ -24,7 +24,7 @@
 (declare ask-acceptable-encoding-available?)
 (declare ask-resource-exists?)
 
-(question available? (ask known-method?) (terminate 503))
+(first-question available? (ask known-method?) (terminate 503))
 (question known-method? (ask uri-too-long?) (terminate 501))
 (question uri-too-long? (terminate 414) (ask method-allowed?))
 (question method-allowed? (ask malformed?) (terminate 405))
@@ -44,6 +44,3 @@
 (question accept-encoding-exists? (ask acceptable-encoding-available?) (ask resource-exists?))
 (question acceptable-encoding-available? (ask resource-exists?) (terminate 406))
 (question resource-exists? (follow :with-resource) (follow :without-resource))
-
-(def start
-  ask-available?)

@@ -23,7 +23,7 @@
 (declare ask-put?)
 (declare ask-conflict?)
 
-(question if-unmodified-since? (ask if-unmodified-since-valid-date?) (ask if-none-match-exists?))
+(first-question if-unmodified-since? (ask if-unmodified-since-valid-date?) (ask if-none-match-exists?))
 (question if-unmodified-since-valid-date? (ask last-modified-gt-if-unmodified-since?) (ask if-none-match-exists?))
 (question last-modified-gt-if-unmodified-since? (terminate 412) (ask if-none-match-exists?))
 (question if-none-match-exists? (ask if-none-match-*) (ask if-modified-since-exists?))
@@ -39,6 +39,3 @@
 (question post? (follow :post-on-missing-resource) (ask put?))
 (question put? (ask conflict?) (follow :maybe-multiple-representations))
 (question conflict? (terminate 409) (follow :new-resource))
-
-(def start
-  ask-if-unmodified-since?)

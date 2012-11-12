@@ -2,7 +2,4 @@
   (:use httpfoo.macros
         httpfoo.protocols))
 
-(question multiple-representation? (terminate 300) (terminate 200))
-
-(def start
-  ask-multiple-representation?)
+(first-question multiple-representation? (terminate 300) (terminate 200))

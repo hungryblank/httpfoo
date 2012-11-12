@@ -17,3 +17,12 @@
      (if (~name request#)
        (~@positive-clause request#)
        (~@negative-clause request#))))
+
+(defmacro first-question
+  [name positive-clause negative-clause]
+  `(def ~'start
+      (defn ~(symbol (str "ask-" name))
+        [request#]
+        (if (~name request#)
+          (~@positive-clause request#)
+          (~@negative-clause request#)))))

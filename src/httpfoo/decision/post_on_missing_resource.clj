@@ -3,7 +3,4 @@
         httpfoo.protocols)
   (:require [httpfoo.decision.new-resource :as new-resource]))
 
-(question redirect? (terminate 303) (follow :new-resource))
-
-(def start
-  ask-redirect?)
+(first-question redirect? (terminate 303) (follow :new-resource))
