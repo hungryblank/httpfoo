@@ -1,5 +1,4 @@
-(ns httpfoo.diagram
-  (:require [clojure.pprint :as pp]))
+(ns httpfoo.diagram)
 
 (def state-flow
 { :root '(
@@ -79,7 +78,7 @@
   (put? (ask conflict?) (follow :maybe-multiple-representations))
   (conflict? (terminate 409) (follow :new-resource)))})
 
-(defn all-questions
+(defn ^:export all-questions
   "all questions needed by the decision flow, used as a base for protocol"
   []
   (distinct
