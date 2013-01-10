@@ -1,13 +1,26 @@
 # httpfoo
 
-A Clojure library designed to ... well, that part is up to you.
+An attempt to render the decision engine of
+[webmachine](https://github.com/basho/webmachine) in clojure.
+
+## Rationale
+
+Webmachine implements a decision engine to handle any HTTP request that
+implements the decision tree described in this
+[flow chart](https://raw.github.com/wiki/basho/webmachine/images/http-headers-status-v3.png).
 
 ## Usage
 
-FIXME
+An implementation of the decision engine is provided, also a protocol
+that must be implemented by an httpfoo handler is given, implementing
+this protocol should result in the ability of handling properly all HTTP
+requests that handle REST resource
 
-## License
+## Notes
 
-Copyright © 2012 FIXME
+This is my first clojure learning project and as such s guaranteed to be
+wrong in many ways.
 
-Distributed under the Eclipse Public License, the same as Clojure.
+## Status
+
+Largely incomplete
