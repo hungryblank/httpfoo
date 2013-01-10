@@ -1,5 +1,7 @@
 # httpfoo
 
+[![Build Status](https://travis-ci.org/hungryblank/httpfoo.png)](https://travis-ci.org/hungryblank/httpfoo)
+
 An attempt to render the decision engine of
 [webmachine](https://github.com/basho/webmachine) in clojure.
 
